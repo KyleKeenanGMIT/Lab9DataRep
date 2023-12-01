@@ -1,5 +1,7 @@
 import Card from 'react-bootstrap/Card';//card import.
 import { Link } from 'react-router-dom';//link import. - used to create the button to change URL.
+import  Button  from 'react-bootstrap/Button';//btn import
+import axios from 'axios';//axios import
 
 function BookItem(props){
      
@@ -13,6 +15,17 @@ function BookItem(props){
         
       </Card.Body>
       <Link to = {"/edit/"+props.myBook._id} className='btn btn-primary'>Edit</Link> {/* button to change url to /edit - btn primary displays the blue outline around the button bring me to my chose book to edit */}
+      <Button variant = 'danger' onClick={
+        (e) => {
+            axios.delete('http://localhost:4000/api/book/' +props.myBook._id)
+
+            .then((res)=>{
+            let reload = props.reload();
+            })
+            .catch();
+
+        }
+      }>Delete</Button>
     </Card>
 
            
